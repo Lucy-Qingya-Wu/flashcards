@@ -33,7 +33,6 @@ export default class Quiz extends Component{
 			answered: false,
 			done: false,
 			
-			shortAnswer: false,
 			input: ''
 		}
 	}
@@ -42,19 +41,13 @@ export default class Quiz extends Component{
 	    const {currentQuestionIndex} = this.state
 		
 		this.setState(preState=>{
-			return {currentQuestionIndex: preState.currentQuestionIndex+1, showQuestion: true, showAnswer: false}
+			return {currentQuestionIndex: preState.currentQuestionIndex+1, showQuestion: true, showAnswer: false, answered:false}
 		})
 	}
 	
 	componentDidMount = () => {
 		const {deck} = this.props
 		this.setState({totalNumOfQuestions:deck['questions'].length})
-		const {answer} = deck['questions'][currentQuestionIndex]
-		if (answer !== 'correct' && answer !== 'incorrect'){
-			this.setState({shortAnswer:true})
-		}else{
-			this.setState({shortAnswer:false})
-		}
 		
 	}
 	finishedQuiz = () => {
@@ -85,7 +78,7 @@ export default class Quiz extends Component{
 	    const {totalNumOfQuestions, correctAnswer, currentQuestionIndex, showQuestion, showAnswer, answered, done, input} = this.state
 		const {deck} = this.props
 		const {question, answer} = deck['questions'][currentQuestionIndex]
-		
+		let shortAnswer = answer !== 'correct' && answer !== 'incorrect' 
 		if (totalNumOfQuestions === 0){
 			return (<View>There is no question in this quiz.</View>)
 		}
