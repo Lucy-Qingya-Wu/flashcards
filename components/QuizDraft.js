@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native'
 import {connect} from 'react-redux'
 
 export const TextButton = ({ onPress, style={}, children }){
@@ -25,37 +25,67 @@ export default class Quiz extends Component{
 		
 			totalNumOfQuestions:0,
 			correctAnswer: 0,
-			currentQuestionIndex: 1,
+			currentQuestionIndex: 0,
 			
 			showQuestion: true,
 			showAnswer: false,
 			
 			answered: false,
 			done: false,
+			
+			shortAnswer: false,
+			input: ''
 		}
 	}
 	
 	nextQuestion = () => {
+	    const {currentQuestionIndex} = this.state
+		
 		this.setState(preState=>{
 			return {currentQuestionIndex: preState.currentQuestionIndex+1, showQuestion: true, showAnswer: false}
 		})
 	}
 	
-	componentDidMount(){
+	componentDidMount = () => {
 		const {deck} = this.props
 		this.setState({totalNumOfQuestions:deck['questions'].length})
+		const {answer} = deck['questions'][currentQuestionIndex]
+		if (answer !== 'correct' && answer !== 'incorrect'){
+			this.setState({shortAnswer:true})
+		}else{
+			this.setState({shortAnswer:false})
+		}
+		
+	}
+	finishedQuiz = () => {
+	    const {done} = this.state
+		this.setState({done:true})
 	}
      
-	handleUserAnswer(userInput, answer){
+	handleUserAnswer = (userInput, answer) => {
+	    const {correctAnswer, showQuestion, showAnswer, answered} = this.state
+		let score = this.state.correctAnswer
 		if (userInput === answer){
-			
+			score += 1
 		}
+		this.setState(preState=>{
+			return {
+				
+				showAnswer:true,
+				showQuestion: false,
+				answered: true,
+				correctAnswer:score, 
+			}
+		})
+		
 	}
 
 	render(){
 	
-	    const {totalNumOfQuestions, correctAnswer, currentQuestionIndex, showQuestion, showAnswer, done} = this.state
-		const {question, answer} = this.props.deck['questions'][currentQuestionIndex]
+	    const {totalNumOfQuestions, correctAnswer, currentQuestionIndex, showQuestion, showAnswer, answered, done, input} = this.state
+		const {deck} = this.props
+		const {question, answer} = deck['questions'][currentQuestionIndex]
+		
 		if (totalNumOfQuestions === 0){
 			return (<View>There is no question in this quiz.</View>)
 		}
@@ -76,21 +106,42 @@ export default class Quiz extends Component{
 					{showAnswer && (
 						<View>
 							<Text>Answer: {answer}</Text>
-							<TextButton onPress={()=>this.setState({showAnswer: true, showQuestion:false})}>showAnswer</TextButton>
+							<TextButton onPress={()=>this.setState({showAnswer: false, showQuestion:true})}>showAnswer</TextButton>
 						</View>
 					)}
 					
 					// show "incorrect/correct" button or show "NEXT QUESTION ->" button or show "DONE" button
-					{!answered && (
+					{!answered && !shortAnswer && (
 						<View>
 							<TextButton onPress={()=>this.handleUserAnswer("correct", answer)}>correct</TextButton>
 							<TextButton onPress={()=>this.handleUserAnswer("incorrect", answer)}>incorrect</TextButton>
 						</View>
 					)}
 					
-					{answered && (
-						
+					{!answered && shortAnswer && (
+						<View>
+						    <KeyboardAvoidingView behavior='padding'>
+								<TextInput
+									value={input}
+									onChangeText={input=>this.setState({input})}
+								/>
+							</KeyboardAvoidingView>
+							<TextButton onPress={()=>this.handleUserAnswer(this.state.input, answer)}>submit</TextButton>
+						</View>
 					)}
+					
+					{answered && currentQuestionIndex+1 > totalNumOfQuestions - 1 && (
+						<View>
+							<TextButton onPress={()=>this.finishedQuiz()}>Done</TextButton>	
+						</View>					
+					)}
+
+					{answered && currentQuestionIndex+1 <= totalNumOfQuestions - 1 && (
+						<View>
+							<TextButton onPress={()=>this.nextQuestion()}>NEXT QUESTION -></TextButton>	
+						</View>					
+					)}					
+					
 				</View>
 			)
 		}
