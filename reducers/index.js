@@ -35,25 +35,30 @@ const decks = (state={}, action) => {
         case RECEIVED_DECKS:
             return action.decks
 	    case ADD_CARD:
+	    	const {title, card} = action
 
-			return {
-				...state,
-				[action.title]: {
-					...state[action.title]
-					["questions"]: state[action.title]['questions'].concat(action.card)
+			console.log("state: ", state)
+			console.log("state[title]: ", state[title])
 
+			console.log("title: ", title)
+			console.log("card: ", card)
+
+			return Object.assign({}, state, {
+				[title]:{
+					...state[title],
+					"questions":state[title]["questions"].concat(card)
 				}
-			}
+			})
 
 		case ADD_DECK:
 
-			return {
-				...state,
+			return Object.assign({}, state, {
+
 				[action.title]:{
-					questions:{}
-					title:action.title
+					questions:[],
+					"title":action.title
 				}
-			}
+			})
 
 		default:
 			return state
