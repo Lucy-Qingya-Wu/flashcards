@@ -20,7 +20,9 @@ class Deck extends Component{
 
 	render(){
 		const {deck, navigation} = this.props
+		console.log("Deck, this.props: ", this.props)
 		const {title, questions} = deck
+		console.log("title: ", title)
 		return (
 			<View>
 				<DeckInfo title={title} numOfCards={questions.length} />
@@ -29,9 +31,9 @@ class Deck extends Component{
 					<Text>Add Card</Text>
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={()=>navigation.navigate('Quiz', {title})}>
+				{questions.length > 0 && (<TouchableOpacity onPress={()=>navigation.navigate('Quiz', {title})}>
 					<Text>Start Quiz</Text>
-				</TouchableOpacity>
+				</TouchableOpacity>)}
 			</View>
 		)
 	}

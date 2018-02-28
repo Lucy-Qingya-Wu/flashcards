@@ -10,11 +10,15 @@ import {
 import DeckInfo from './DeckInfo'
 
 import {connect} from 'react-redux'
-
+import {getDecks} from '../utils/api'
+import {receivedDecks} from '../actions/index'
 
 class Decks extends Component{
 
 
+	componentDidMount(){
+		getDecks().then(data=>this.props.receivedDecks(data))
+	}
 
     renderItem = ({item}) => {
     	const {navigation} = this.props
@@ -61,4 +65,4 @@ function mapStateToProps(decks){
 
 }
 
-export default connect(mapStateToProps)(Decks)
+export default connect(mapStateToProps, {receivedDecks})(Decks)
