@@ -104,8 +104,8 @@ class Quiz extends Component{
 					)}
 
 
-					<TextButton onPress={()=>this.handleUserAnswer("correct")}>Correct</TextButton>
-					<TextButton onPress={()=>this.handleUserAnswer("incorrect")}>Incorrect</TextButton>
+					<TextButton style={{color:'black'}} onPress={()=>this.handleUserAnswer("correct")}>Correct</TextButton>
+					<TextButton style={{color:'red'}} onPress={()=>this.handleUserAnswer("incorrect")}>Incorrect</TextButton>
 
 
 				</View>

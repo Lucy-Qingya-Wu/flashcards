@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, TextInput, Alert, KeyboardAvoidingView} from 'react-native'
+import {View, Text, TextInput, Alert, KeyboardAvoidingView, StyleSheet} from 'react-native'
 
 import TextButton from './TextButton'
 
@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import {addCard} from '../actions/index'
 
 import * as api from '../utils/api'
+import {black} from '../utils/colors'
 
 class AddCard extends Component{
 	static navigationOptions = () => {
@@ -48,21 +49,26 @@ class AddCard extends Component{
 		const {question, answer} = this.state
 		return (
 
-				<KeyboardAvoidingView behavior='padding' style={{flex:1}} >
-				    <Text>{JSON.stringify(this.state)}</Text>
-					<TextInput
+				<KeyboardAvoidingView behavior='padding' style={styles.container} >
 
-						placeholder='Question'
+					<TextInput
+						style={styles.input}
+						placeholder='Please type your question here'
 						onChangeText={question=>this.setState({question})}
 						value={question}
 					/>
 					<TextInput
-						placeholder='Answer'
+						style={[styles.input, {marginTop: 0}]}
+						placeholder='Please type your answer here'
 						onChangeText={answer=>this.setState({answer})}
 						value={answer}
 					/>
 					<TextButton onPress={this.onSubmit}>
-					    submit
+					    Submit
+				    </TextButton>
+
+				    <TextButton onPress={()=>this.props.navigation.goBack()}>
+					    Go Back
 				    </TextButton>
 
 				</KeyboardAvoidingView>
@@ -72,5 +78,23 @@ class AddCard extends Component{
 	}
 
 }
+const styles = StyleSheet.create({
+	container:{
 
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	input: {
+	    padding: 10,
+	    borderRadius: 7,
+	    height: 45,
+	    width: '95%',
+	    textAlign: 'center',
+	    fontSize:15,
+	    borderColor: black,
+        borderWidth: 0.5,
+        margin: 20,
+	}
+
+})
 export default connect(null, {addCard})(AddCard)

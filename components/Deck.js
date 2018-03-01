@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import {
 	View,
 	Text,
-	TouchableOpacity
+	TouchableOpacity,
+	StyleSheet
 } from 'react-native'
 import DeckInfo from './DeckInfo'
 import {connect} from 'react-redux'
-
+import TextButton from './TextButton'
 class Deck extends Component{
 
 	static navigationOptions = ({ navigation }) => {
@@ -24,16 +25,23 @@ class Deck extends Component{
 		const {title, questions} = deck
 		console.log("title: ", title)
 		return (
-			<View>
-				<DeckInfo title={title} numOfCards={questions.length} />
+			<View style={styles.deck}>
+				<View style={styles.item}>
+					<DeckInfo title={title} numOfCards={questions.length} />
+				</View>
 
-				<TouchableOpacity onPress={()=>navigation.navigate('AddCard', {title})}>
-					<Text>Add Card</Text>
-				</TouchableOpacity>
+				<TextButton onPress={()=>navigation.navigate('AddCard', {title})}>
+					Add Card
+				</TextButton>
 
-				{questions.length > 0 && (<TouchableOpacity onPress={()=>navigation.navigate('Quiz', {title})}>
-					<Text>Start Quiz</Text>
-				</TouchableOpacity>)}
+				{questions.length > 0 && (<TextButton onPress={()=>navigation.navigate('Quiz', {title})}>
+					Start Quiz
+				</TextButton>)}
+
+				<TextButton onPress={()=>navigation.goBack()}>
+					Go Back
+				</TextButton>
+
 			</View>
 		)
 	}
@@ -46,4 +54,16 @@ function mapStateToProps(decks, {navigation}){
 		deck:decks[title]
 	}
 }
+
+const styles = StyleSheet.create({
+	deck:{
+
+		justifyContent:'center',
+		alignItems:'center',
+
+	},
+	item:{
+		padding: 40
+	}
+})
 export default connect(mapStateToProps)(Deck)

@@ -22,6 +22,8 @@ import reducer from './reducers'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 
+
+
 const Tabs = TabNavigator({
   Decks:{
     screen:Decks,
@@ -67,34 +69,27 @@ const MainNavigator = StackNavigator({
   },
   Deck:{
     screen: Deck,
-    navigationOptions: {
 
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple
-      }
-    }
   },
   Quiz:{
     screen: Quiz,
-    navigationOptions: {
 
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple
-      }
-    }
   },
   AddCard:{
     screen: AddCard,
+
+  }
+}, {
+
     navigationOptions: {
+
 
       headerTintColor: white,
       headerStyle: {
         backgroundColor: purple
       }
     }
-  }
+
 })
 function StatusBar({backgroundColor, ...props}){
   return (

@@ -4,7 +4,8 @@ import {
 	View,
 	Text,
 	TouchableOpacity,
-	FlatList
+	FlatList,
+	StyleSheet
 } from 'react-native'
 
 import DeckInfo from './DeckInfo'
@@ -24,13 +25,25 @@ class Decks extends Component{
     	const {navigation} = this.props
     	const {title} = item
     	return (
-	    	<TouchableOpacity onPress={()=>navigation.navigate('Deck', {title})}>
+	    	<TouchableOpacity style={styles.item} onPress={()=>navigation.navigate('Deck', {title})}>
 	    		<DeckInfo {...item} />
 	    	</TouchableOpacity>
     	)
     }
 
     keyExtractor = (data) => data.title
+
+	renderSeparator = () => {
+	    return (
+	        <View
+	          style={{
+	            height: 1,
+	            backgroundColor: "#CED0CE",
+
+	          }}
+	        />
+	    )
+	 }
 
 	render(){
 		const {decks} = this.props
@@ -44,15 +57,16 @@ class Decks extends Component{
         })
 
 		return (
-			<View>
+			<View style={styles.container}>
 
 				<FlatList
+                    ItemSeparatorComponent={this.renderSeparator}
 					data={info}
 					renderItem={this.renderItem}
 					keyExtractor={this.keyExtractor}
 				/>
-
 			</View>
+
 		)
 	}
 }
@@ -64,5 +78,15 @@ function mapStateToProps(decks){
 	}
 
 }
+const styles = StyleSheet.create({
+	container:{
+		flex:1,
+		paddingTop: 20,
 
+	},
+	item:{
+
+		padding: 20
+	}
+})
 export default connect(mapStateToProps, {receivedDecks})(Decks)
