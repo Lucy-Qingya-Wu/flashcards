@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native'
+import {View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 import TextButton from './TextButton'
 
-
+import {clearLocalNotification, setNotification} from '../utils/helpers'
 class Quiz extends Component{
 	static navigationOptions = () => {
 
@@ -52,6 +52,7 @@ class Quiz extends Component{
 		}
 
 		if (currentQuestionIndex+1 > totalNumOfQuestions - 1){
+			clearLocalNotification().then(setNotification())
 			this.setState({
 				correctAnswer:score,
 				done:true
@@ -85,27 +86,29 @@ class Quiz extends Component{
 		if (!done){
 
 			return (
-				<View>
+				<View style={styles.center}>
 
 
 					{showQuestion && (
-						<View>
-							<Text>{question}</Text>
-							<TextButton onPress={()=>this.setState({showAnswer: true, showQuestion:false})}>show answer</TextButton>
+						<View style={styles.center}>
+							<Text style={[styles.text, {fontWeight: 'bold'}]}>{question}</Text>
+
+							<TextButton style={{color: 'red', fontWeight: 'bold'}} onPress={()=>this.setState({showAnswer: true, showQuestion:false})}>show answer</TextButton>
 						</View>
 					)}
 
 
 					{showAnswer && (
-						<View>
-							<Text>Answer: {answer}</Text>
-							<TextButton onPress={()=>this.setState({showAnswer: false, showQuestion:true})}>show questionr</TextButton>
+						<View style={styles.center}>
+							<Text style={[styles.text, {fontWeight: 'bold'}]}>{answer}</Text>
+
+							<TextButton  style={{color: 'red', fontWeight: 'bold'}} onPress={()=>this.setState({showAnswer: false, showQuestion:true})}>show question</TextButton>
 						</View>
 					)}
 
 
-					<TextButton style={{color:'black'}} onPress={()=>this.handleUserAnswer("correct")}>Correct</TextButton>
-					<TextButton style={{color:'red'}} onPress={()=>this.handleUserAnswer("incorrect")}>Incorrect</TextButton>
+					<TextButton style={[styles.btn, {color:'black'}]} onPress={()=>this.handleUserAnswer("correct")}>Correct</TextButton>
+					<TextButton style={[styles.btn, {color:'red'}]} onPress={()=>this.handleUserAnswer("incorrect")}>Incorrect</TextButton>
 
 
 				</View>
@@ -130,5 +133,30 @@ function mapStateToProps(decks, {navigation}){
 		deck: decks[title]
 	}
 }
+
+const styles = StyleSheet.create({
+	center:{
+
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	text: {
+	    padding: 20,
+	    textAlign: 'center',
+	    fontSize:30,
+
+	},
+	btn: {
+		borderColor: 'black',
+        borderWidth: 1,
+        textAlign: 'center',
+	    fontSize:15,
+	    borderRadius: 7,
+	    padding: 5,
+	    margin: 10,
+	    height: 45,
+	    width: '40%',
+	}
+})
 
 export default connect(mapStateToProps)(Quiz)

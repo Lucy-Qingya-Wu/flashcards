@@ -23,7 +23,7 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 
 
-
+import {clearLocalNotification, setNotification} from './utils/helpers'
 const Tabs = TabNavigator({
   Decks:{
     screen:Decks,
@@ -100,7 +100,11 @@ function StatusBar({backgroundColor, ...props}){
 }
 
 export default class App extends React.Component {
+  componentDidMount(){
+    clearLocalNotification().then(setNotification())
+  }
   render() {
+
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex:1}}>
