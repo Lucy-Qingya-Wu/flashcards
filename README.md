@@ -14,7 +14,7 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 * Yarn
 * Node
-* [Expo XDE](https://docs.expo.io/versions/latest/introduction/installation.html)
+* [Expo XDE](https://docs.expo.io/versions/latest/introduction/installation.html) (Expo Development Environment)
 * [Expo Client](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8)
 
 
