@@ -7,6 +7,7 @@ import {Ionicons} from '@expo/vector-icons'
 
 import * as Progress from 'react-native-progress'
 import {clearLocalNotification, setNotification} from '../utils/helpers'
+
 class Quiz extends Component{
 	static navigationOptions = () => {
 
@@ -117,6 +118,9 @@ class Quiz extends Component{
 						</View>
 					    <Text style={{paddingTop:17}}>{currentQuestionIndex+1}/{totalNumOfQuestions}</Text>
 					</View>
+
+
+
 					{showQuestion && (
 						<View style={{alignItems: 'center', height:'60%', width:'90%', paddingTop:40}}>
 							<Text style={styles.text}>{question}</Text>

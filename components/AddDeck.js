@@ -34,7 +34,7 @@ class AddDeck extends Component{
 		this.props.addDeck(this.state.title)
 		// call addDeck in api
 		api.addDeck(this.state.title)
-		navigation.goBack()
+		navigation.navigate('Deck', {title:this.state.title})
 		this.setState({title: ''})
 
 	}
