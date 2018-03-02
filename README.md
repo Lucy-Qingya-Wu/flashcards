@@ -1,6 +1,9 @@
 # Flashcards
 
-Flashcards is an iOS application built with React-Native and Redux. It allows users to create different categories of flashcards called "decks" and add new flashcards to each deck. At some later point of time, when users review the questions, they can also use the app to take quizzes on those decks. For each quesiton on the quiz, users can think about the answer and click on "show answer" to check if their answer is correct. If they get the right answer, then they press the "correct" button otherwise "incorrect" button.
+Flashcards is an iOS application built with React-Native and Redux. It allows users to create different categories of flashcards called "decks" and add new flashcard to each deck. At some later point of time, when users review the flashcards, they can also take quizzes in the app.
+
+
+For each quiz quesiton, users think about the answer first and then click on "show answer" to check if their answer is correct. If they get the right answer, then press the "correct" button otherwise "incorrect" button.
 
 ### Table of Contents
 * [Prerequisites](#prerequisites)
