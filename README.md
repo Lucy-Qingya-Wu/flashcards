@@ -20,7 +20,7 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 ### Installing
 
-* Clone this repo and install al the dependencies:
+* Clone this repo and install all the dependencies:
 
 	```
 	$ git clone https://github.com/Lucy-Qingya-Wu/flashcards.git
