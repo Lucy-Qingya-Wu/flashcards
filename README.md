@@ -12,7 +12,7 @@ Flashcards is an iOS application built with React-Native and Redux. It allows us
 * Yarn
 * Node
 * [Expo XDE](https://docs.expo.io/versions/latest/introduction/installation.html)
-* [Expo Client](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8) - download it from Apple Store
+* [Expo Client](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8)
 
 
 ### Installing
