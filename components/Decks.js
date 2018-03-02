@@ -71,13 +71,8 @@ class Decks extends Component{
 	}
 }
 
-function mapStateToProps(decks){
+const mapStateToProps = (decks) => ({ decks })
 
-	return {
-		decks
-	}
-
-}
 const styles = StyleSheet.create({
 	container:{
 		flex:1,

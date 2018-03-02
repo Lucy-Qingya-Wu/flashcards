@@ -35,6 +35,23 @@ class Quiz extends Component{
 		}
 	}
 
+	restartQuiz = () => {
+		const {correctAnswer, currentQuestionIndex, showQuestion, showAnswer, done, progress} = this.state
+		this.setState({
+
+			correctAnswer: 0,
+			currentQuestionIndex: 0,
+
+			showQuestion: true,
+			showAnswer: false,
+
+
+			done: false,
+			progress: 0
+
+
+		})
+	}
 
 
 	componentDidMount = () => {
@@ -146,8 +163,11 @@ class Quiz extends Component{
 						color='orange'
 						style={{paddingTop: 20}}
 					/>
+					<TextButton onPress={this.restartQuiz}>
+					    Restart Quiz
+				    </TextButton>
 					<TextButton onPress={()=>this.props.navigation.goBack()}>
-					    Go Back
+					    Back to Deck
 				    </TextButton>
 				</View>
 			)
