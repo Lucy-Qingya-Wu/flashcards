@@ -9,7 +9,11 @@ Flashcards is an iOS application built with React-Native and Redux. It allows us
 
 ### Prerequisites
 
-npm is needed. If you have Node installed, then you should have npm. Otherwise, install [Node](https://nodejs.org/en/).
+* Yarn
+* Node
+* [Expo XDE](https://docs.expo.io/versions/latest/introduction/installation.html)
+* [Expo Client](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8)
+
 
 ### Installing
 
