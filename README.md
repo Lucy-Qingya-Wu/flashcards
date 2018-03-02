@@ -12,30 +12,27 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 ### Prerequisites
 
-* Yarn
-* Node
-* [Expo XDE](https://docs.expo.io/versions/latest/introduction/installation.html) (Expo Development Environment)
+* [Yarn](https://www.npmjs.com/package/yarn)
+* [Node](https://nodejs.org/en/)
+* [Expo XDE](https://docs.expo.io/versions/latest/introduction/installation.html) (Expo Development Environment) - optional
 * [Expo Client](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8)
 
 
 ### Installing
 
-This repo only contains the front-end portion of this project. You will need to download the back-end API server code in order to interact with the front end. More info about the API server is [here](https://github.com/udacity/reactnd-project-readable-starter/blob/master/README.md).
-
-
-* Install and run the back-end API server
+* Clone this repo and install al the dependencies:
 
 	```
-	$ git clone https://github.com/udacity/reactnd-project-readable-starter.git
+	$ git clone https://github.com/Lucy-Qingya-Wu/flashcards.git
 
-	$ cd reactnd-project-readable-starter/api-server
+	$ cd flashcards
 
 	$ npm install
 
-	$ npm start
+	$ yarn start
 
 	```
-* Check [localhost:3001](http://localhost:3001/) in your browser
+
 
 * In another terminal window, install and run the front-end
 
