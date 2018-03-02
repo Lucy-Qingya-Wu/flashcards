@@ -2,7 +2,10 @@ import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 import TextButton from './TextButton'
+import {lightPurp, purple} from '../utils/colors'
+import {Ionicons} from '@expo/vector-icons'
 
+import * as Progress from 'react-native-progress'
 import {clearLocalNotification, setNotification} from '../utils/helpers'
 class Quiz extends Component{
 	static navigationOptions = () => {
@@ -26,6 +29,7 @@ class Quiz extends Component{
 
 
 			done: false,
+			progress: 0
 
 
 		}
@@ -42,7 +46,7 @@ class Quiz extends Component{
 
 	handleUserAnswer = (userInput) => {
 
-	    const {correctAnswer, showQuestion, showAnswer, currentQuestionIndex, totalNumOfQuestions, done} = this.state
+	    const {correctAnswer, showQuestion, progress, showAnswer, currentQuestionIndex, totalNumOfQuestions, done} = this.state
 
 		let score = this.state.correctAnswer
 
@@ -61,7 +65,10 @@ class Quiz extends Component{
 
 			this.setState(preState=>{
 				return {
+
 					currentQuestionIndex: preState.currentQuestionIndex+1,
+					progress: (preState.currentQuestionIndex+1)/totalNumOfQuestions,
+
 					showQuestion: true,
 					showAnswer: false,
 					correctAnswer:score,
@@ -77,38 +84,51 @@ class Quiz extends Component{
 
 	render(){
 
-	    const {totalNumOfQuestions, correctAnswer, currentQuestionIndex, showQuestion, showAnswer, done} = this.state
+	    const {totalNumOfQuestions, correctAnswer, progress, currentQuestionIndex, showQuestion, showAnswer, done} = this.state
 		const {deck} = this.props
 
 		const {question, answer} = deck['questions'][currentQuestionIndex]
 
-
+		console.log("progress", progress)
 		if (!done){
 
 			return (
 				<View style={styles.center}>
-
-
+					<View style={{flexDirection: 'row'}}>
+						<View style={{paddingTop:20}}>
+							<Progress.Bar progress={progress} height={8} width={200} />
+						</View>
+					    <Text style={{paddingTop:17}}>{currentQuestionIndex+1}/{totalNumOfQuestions}</Text>
+					</View>
 					{showQuestion && (
-						<View style={styles.center}>
-							<Text style={[styles.text, {fontWeight: 'bold'}]}>{question}</Text>
+						<View style={{alignItems: 'center', height:'60%', width:'90%', paddingTop:40}}>
+							<Text style={styles.text}>{question}</Text>
 
-							<TextButton style={{color: 'red', fontWeight: 'bold'}} onPress={()=>this.setState({showAnswer: true, showQuestion:false})}>show answer</TextButton>
+							<TextButton style={{color:'red'}} onPress={()=>this.setState({showAnswer: true, showQuestion:false})}>show answer</TextButton>
 						</View>
 					)}
 
 
 					{showAnswer && (
-						<View style={styles.center}>
-							<Text style={[styles.text, {fontWeight: 'bold'}]}>{answer}</Text>
+						<View style={{alignItems: 'center', height:'60%', width:'90%', paddingTop:40}}>
+							<Text style={styles.text}>{answer}</Text>
 
-							<TextButton  style={{color: 'red', fontWeight: 'bold'}} onPress={()=>this.setState({showAnswer: false, showQuestion:true})}>show question</TextButton>
+							<TextButton style={{color:'red'}} onPress={()=>this.setState({showAnswer: false, showQuestion:true})}>show question</TextButton>
 						</View>
 					)}
 
 
-					<TextButton style={[styles.btn, {color:'black'}]} onPress={()=>this.handleUserAnswer("correct")}>Correct</TextButton>
-					<TextButton style={[styles.btn, {color:'red'}]} onPress={()=>this.handleUserAnswer("incorrect")}>Incorrect</TextButton>
+					<TouchableOpacity
+						style={styles.btn}
+						onPress={()=>this.handleUserAnswer("correct")}
+					><Text style={{color:'black', fontSize:20}}>Correct</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						style={styles.btn}
+						onPress={()=>this.handleUserAnswer("incorrect")}
+					><Text style={{color:'red', fontSize:20}}>Incorrect</Text>
+					</TouchableOpacity>
 
 
 				</View>
@@ -116,10 +136,19 @@ class Quiz extends Component{
 		}
 		else{
 			return (
-				<View>
-					<Text>
+				<View style={{alignItems: 'center', justifyContent:'center', paddingTop: 20}}>
+					<Text style={{fontSize:40, textAlign:'center'}}>
 						Your answered {correctAnswer/totalNumOfQuestions*100} % question(s) correctly !
 					</Text>
+					<Ionicons
+						name='ios-happy-outline'
+						size={100}
+						color='orange'
+						style={{paddingTop: 20}}
+					/>
+					<TextButton onPress={()=>this.props.navigation.goBack()}>
+					    Go Back
+				    </TextButton>
 				</View>
 			)
 		}
@@ -137,25 +166,24 @@ function mapStateToProps(decks, {navigation}){
 const styles = StyleSheet.create({
 	center:{
 
-		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	text: {
-	    padding: 20,
-	    textAlign: 'center',
-	    fontSize:30,
+
+		fontSize: 30
 
 	},
 	btn: {
-		borderColor: 'black',
-        borderWidth: 1,
-        textAlign: 'center',
-	    fontSize:15,
-	    borderRadius: 7,
-	    padding: 5,
-	    margin: 10,
-	    height: 45,
-	    width: '40%',
+
+		borderWidth: 2,
+		padding: 10,
+		borderRadius: 7,
+		height: 50,
+		width: '40%',
+		marginLeft: 40,
+		marginTop: 10,
+		marginRight: 40,
+		alignItems: 'center',
 	}
 })
 

@@ -68,7 +68,7 @@ class AddCard extends Component{
 				    </TextButton>
 
 				    <TextButton onPress={()=>this.props.navigation.goBack()}>
-					    Go Back
+					    Cancel
 				    </TextButton>
 
 				</KeyboardAvoidingView>
