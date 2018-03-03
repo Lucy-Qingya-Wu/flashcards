@@ -34,8 +34,8 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 	```
 
-* You can use Expo Client to scan the QR code shown in the terminal to load the app on your phone.
-* Please make sure the node server is running on the same network as the expo in your device.
+You can use Expo Client to scan the QR code shown in the terminal to load the app on your phone.
+Please make sure the node server is running on the same network as the expo in your device.
 
 
 * If it does not work, please try the following way:
