@@ -38,7 +38,7 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 
 
-* If it does not work, don't worry. You can start the project in Expo XDE, press the gear icon, choose "Host -> Tunnel", and put the project url in Expo Client. Then you will see the app on your device.
+* If it does not work, don't worry! You can start the project in Expo XDE, press the gear icon, choose "Host -> Tunnel", and put the project url in Expo Client. Then you will see the app on your device.
 
 * Please make sure the node server is running on the same network as the expo in your device.
 
