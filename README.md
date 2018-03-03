@@ -34,23 +34,17 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 	```
 
-You can use Expo Client to scan the QR code shown in the terminal to load the app on your phone.
-Please make sure the node server is running on the same network as the expo in your device.
+You can use Expo Client to scan the QR code shown in the terminal and check the app on your phone.
 
 
-* If it does not work, please try the following way:
 
-	```
-	$ git clone https://github.com/Lucy-Qingya-Wu/readable.git
+* If it does not work, don't worry. You can start the project in Expo XDE, press the gear icon, choose "Host -> Tunnel", and put the project url in Expo Client. Then you will see the app on your device.
 
-	$ cd readable
+* Please make sure the node server is running on the same network as the expo in your device.
 
-	$ npm install
 
-	$ npm start
-	```
 
-* Check [localhost:3000](http://localhost:3000/) in your browser
+
 
 ### Demo
 
