@@ -38,7 +38,7 @@ class Deck extends Component{
 					Start Quiz
 				</TextButton>)}
 
-				<TextButton onPress={()=>navigation.goBack()}>
+				<TextButton onPress={()=>navigation.navigate('Decks')}>
 					Go Back
 				</TextButton>
 
