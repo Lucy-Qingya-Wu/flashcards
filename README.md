@@ -18,6 +18,7 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 * [Expo Client](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8)
 
 
+
 ### Installing
 
 * Clone this repo and install all the dependencies:
@@ -33,8 +34,11 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 	```
 
+* You can use Expo Client to scan the QR code shown in the terminal to load the app on your phone.
+* Please make sure the node server is running on the same network as the expo in your device.
 
-* In another terminal window, install and run the front-end
+
+* If it does not work, please try the following way:
 
 	```
 	$ git clone https://github.com/Lucy-Qingya-Wu/readable.git
