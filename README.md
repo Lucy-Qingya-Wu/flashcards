@@ -34,7 +34,7 @@ For each quiz quesiton, users think about the answer first and then click on "sh
 
 	```
 
-You can use Expo Client to scan the QR code shown in the terminal and check the app on your phone.
+  You can use Expo Client to scan the QR code shown in the terminal and check the app on your phone.
 
 
 
